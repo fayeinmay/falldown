@@ -1,1 +1,3 @@
-falldown2
+# Falldown
+
+Falldown, the Minecraft mini-game

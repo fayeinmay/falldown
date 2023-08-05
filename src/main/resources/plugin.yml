@@ -1,0 +1,11 @@
+name: Falldown
+main: de.jandev.falldown.Falldown
+version: "1.1"
+api-version: "1.16"
+author: JanDev
+website: "https://jandev.de"
+commands:
+  falldown:
+    description: Main command for Falldown
+    usage: "Invalid Command. Get help with /falldown"
+    aliases: [ fd, fall ]

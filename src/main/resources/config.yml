@@ -1,0 +1,155 @@
+##################################################
+#   ______    _ _     _                          #
+#   |  ____|  | | |   | |                        #
+#   | |__ __ _| | | __| | _____      ___ __      #
+#   |  __/ _` | | |/ _` |/ _ \ \ /\ / / '_ \     #
+#   | | | (_| | | | (_| | (_) \ V  V /| | | |    #
+#   |_|  \__,_|_|_|\__,_|\___/ \_/\_/ |_| |_|    #
+#                                                #
+###################################### By JanDev #
+#
+#_ _  _ ___  ____ ____ ___ ____ _  _ ___ 
+#| |\/| |__] |  | |__/  |  |__| |\ |  |  |
+#| |  | |    |__| |  \  |  |  | | \|  |  |
+
+# Never disable or reload this plugin mid-game, if you do, you should restart your server afterwards!
+# If you want to make any world changes, use the /falldown disable command. Make sure to overwrite your backup world before restarting the server, otherwise your changes will be lost!
+# If you want to play Falldown after you made world changes, restart your server!
+# Changes in this file will not be applied before the server is restarted!
+
+# After setting up the first map, please restart your server for the plugin to work properly!
+# Make sure to set up all maps completely, otherwise the plugin will not work properly!
+# When setting up a map, set up at least 'maxplayers' amount of spawns!
+# All locations within a map need to be in the same world!
+
+# Necessary server settings:
+# '/gamerule announceAdvancements false' and '/gamerule doFireTick false'
+# In server.properties: 'allow-flight: true' and 'difficulty: easy' or higher and 'max-players: same as 'maxplayers'', but can be higher to allow spectators!
+
+# Recommended server settings:
+# In server.properties: 'spawn-protection: 0', 'gamemode: adventure', 'generate-structures: false', 'view-distance: 16', 'merge-radius: 0.0' in Spigot config
+
+# Recommended server settings if using Bungeecord:
+# 'bungeecord: true' in Spigot config, 'connection-throttle: -1' in Bukkit config, 'server-ip: 127.0.0.1' in server.properties 'online-mode: false' in server.properties, 'ip_forward: true' in BungeeCord config
+# If using pterodactyl, use 172.18.0.1 for the servers in Bungecord config and 'server-ip: 0.0.0.0' in server.properties
+
+# Current list of special items: INVISIBILITY, BANDAGE, SPEED_BOOST, TELEPORT, FRIENDLY_FOE, SHIELD, GRENADE, LIGHTNING_ATTACK, DAMAGE_SPAM
+
+# At the end of the game, the world on which the endpoint is located is going to be replaced by the world located in the folder configured
+backup:
+  foldername: "backup"
+  enabled: false
+
+# If sql is disabled all players will start the game with 0 levels and the levels will not be saved
+# Levels will only be saved at the end of a game and after the player died to avoid level exploiting from dropping
+sql:
+  host: example.com
+  port: 3306
+  user: root
+  password: example
+  database: falldown
+  enable: false
+
+setting:
+  minplayers: 4
+  maxplayers: 16
+  startlevel: 1500
+  crystalsize: 25
+  crystalspawnpercentage: 0.50
+  crystalrounds: 10
+  chancefordoublecrystalitem: 50.0
+  levelgivemin: 15
+  levelgivemax: 50
+  gracetime: 60
+  worldborderendsizediameter: 75
+  worldbordertime: 675
+  totalgametime: 1800
+  levelcostperenchant: 75
+  levelcostperbrewing: 125
+  levelloseondeathpercentage: 5.0
+  levelgainonkillpercentage: 2.5
+  supercrystaldamage: 4
+  supercrystalslowrange: 7
+  supercrystalslowduration: 5
+  stickname: "&5&lBrewmaster"
+  votebooktitle: "&8- &c&lVote &8-"
+  scoreboardtitle: "&8----- &3Falldown &8|| &3%timer% &8-----"
+message:
+  general:
+    help: "&8- &7&lYou have access to the following commands &8- &7\n/falldown\n/falldown map\n/falldown forcestart\n/falldown premium\n/falldown vote\n/falldown disable"
+    premium: "&7You can buy premium at &6&lhttps://premium.jandev.de/"
+    console: "Commands cannot be executed from console!"
+    disable: "&7Disabling Falldown until next server reload..."
+    forcestart: "&7Game start forced. &8(&cErrors will occur when starting without at least &42 &cplayers&8)"
+    infobook: "&5&lFalldown&8, by &6&lJanDev\n\n&7Fall through the crystals to get weapons, ingredients and levels. Use levels to enchant your weapons or brew powerful items. Kill the other players to win the game."
+    infobook2: "&7You can get a very powerful item if you destroy the crystal located in the center of the map, but be careful, claiming it comes with a price.\n\nPlease report bugs or request features via Discord, &6Jan#6705"
+  event:
+    playerdeath: "&a&l%player% &7was killed by &c&l%byplayer%&7. &9%number% &7players left!"
+    playerdeathsolo: "&a&l%player% &7just randomly died. &9%number% &7players left!"
+    joinmessage: "&a&l%player% &7joined the game!"
+    joinmessagetoplayer: "&7Welcome on the &6&lFalldown &7server, please be aware that teams are &cforbidden&7!"
+    quitmessage: "&a&l%player% &7left the game!"
+    winner: "&8----------\n\n&6&l%player% &7won the game! &aCongratulations!\n\n&8----------"
+    notenchantable: "&7You &ccan't enchant &7this item or there are no better enchantments left."
+    notenoughlevel: "&7You &cdon't have enough levels &7to perform this action. \nRequired levels: &4%number%&7!"
+    brewingfull: "&7You &ccan't add any more items&7, please use the stick to &aactivate &7or your hand to &cabandon &7the recipe."
+    brewingcomponentalreadyadded: "&7You &calready added &7this component to the brewing stand."
+    recipenotfound: "&7This recipe &cdoesn't exist &7(yet?)."
+    crystalcaptured: "&6&lSuper crystal &7has been &ccaptured &7by &c&l%player%"
+  task:
+    restartlobbynotenoughplayers: "&7Not enough players to start the game. &c&l%min%&7 required, currently &c&l%current%&7/&a&l%max%&7. &lRestarting lobby phase..."
+    gamestartsin: "&7Game starts in &a&l%number% &7seconds."
+    gamestarts: "&5&lHave fun playing Falldown&5&l! Falldown &5&lby &6&lJanDev!"
+    gracestarts: "&a&l%number% &7seconds grace period starts now!"
+    graceends: "&7Grace period will end in &c&l%number% &7seconds!"
+    graceended: "&7Grace period &c&lended&7. You're without protection now."
+    ingameends: "&7Game will end in &c&l%number% &7seconds, because no player has won the game yet!"
+    serverrestartsin: "&7Server restarts in &c&l%number% &7seconds!"
+  premiumjoin:
+    notjoinabledroporending: "&cGame cannot be joined, because players are currently in drop phase or the game just ended!"
+    notjoinablefull: "&cThis game is already full. &7Always want a slot? Get &6premium &7at &6https://premium.jandev.de/"
+    kickedbuypremium: "&cYou were kicked by a higher priority player. &7Get &6premium &7at &6https://premium.jandev.de/ &7to avoid this in the future!"
+    kickedbyhigher: "&cYou were kicked by a higher priority player!"
+    notjoinablefullandnoonekickable: "&cThis game is already full and there is no player with lower priority who could make space for you!"
+  map:
+    help: "&8- &7&lYou have access to the following commands &8- &7\n/falldown map refreshmaps\n/falldown map setlobby\n/falldown map <number> setdrop\n/falldown map <number> setendpoint\n/falldown map <number> setspecspawn\n/falldown map <number> setname\n/falldown map <number> listspawn\n/falldown map <number> setspawn\n/falldown map <number> setcrystal\n/falldown map <number> removespawn <number>\n/falldown map <number> removemap"
+    lobbyset: "&aSuccessfully &7set the lobby spawn!"
+    dropset: "&aSuccessfully &7set the drop area! Please be aware that the height (Y) is always &c750 &7blocks!"
+    endpointset: "&aSuccessfully &7set the final area of the map!"
+    specspawnset: "&aSuccessfully &7set the spectator spawn of the map!"
+    nameset: "&aSuccessfully &7set the name of the map!"
+    spawnlist: "&7%number%. %x%, %y%, %z%"
+    spawnset: "&aSuccessfully &7set a spawn for the map!"
+    crystalset: "&aSuccessfully &7set crystal for superitem!"
+    spawnremoved: "&aSuccessfully &cremoved &7a spawn for the map!"
+    mapremoved: "&aSuccessfully &cremoved &7the map!"
+    refreshmaps: "&aSuccessfully &7refreshed the map list for the vote system. (&cThis does not work for the first map you set up&7)"
+  vote:
+    help: "&8- &7&lYou have access to the following commands &8- &7\n/falldown vote <1-3>"
+    alreadyvoted: "&cYou already voted for a map!"
+    voted: "&aYou successfully voted!"
+    info: "&7Use &l/fd vote 1-3&7, or your &lvote book &7to vote for a map!"
+    maps: "&7%number%. &6&l%mapname% &8- &a&l%votes% &7votes"
+    won: "&6&l%mapname% &awon &7the vote!"
+  specialitem:
+    notingrace: "&cYou cannot activate this item in grace period."
+    cloakactivate: "&6&lYou feel invisible, at least for &c&l10 &6&lseconds"
+    bandage: "&4&lYou embrace the new blood in your veins"
+    speed: "&1&lGotta go fast!"
+    wolf: "&lWolfs will support you for a short duration"
+    shield: "&lYou are shielded for &c&l10 &r&lseconds"
+specialitem:
+  cloaktime: 10
+  bandageheal: 3
+  speedduration: 10
+  speedlevel: 3
+  wolftime: 15
+  wolfamount: 3
+  wolfspeedadd: 0.35
+  shieldtime: 10
+  shielddamagemultiplier: 0.5
+  grenaderadius: 3
+  grenadedelay: 3
+  grenadethrowpower: 0.8
+  explosiondamagemultiplier: 0.25
+  damagespamtime: 10
